@@ -12,13 +12,38 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+             // PK UUID
+            $table->uuid('id')->primary();
+
+            // Field standar Laravel
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+
+            // Level wilayah: rt / lurah / camat / super-admin / operator / viewer
+            $table->string('level_wilayah', 30)->default('operator');
+
+            // Relasi wilayah (boleh null tergantung role)
+            $table->uuid('rt_id')->nullable();
+            $table->uuid('kelurahan_id')->nullable();
+            $table->uuid('kecamatan_id')->nullable();
+
+            // OPD / unit kerja (opsional)
+            $table->uuid('opd_id')->nullable();
+
+            // Status user
+            $table->boolean('is_active')->default(true);
+
             $table->timestamps();
+
+            // Index untuk mendukung query GlobalScope & filter
+            $table->index('level_wilayah');
+            $table->index('rt_id');
+            $table->index('kelurahan_id');
+            $table->index('kecamatan_id');
+            $table->index('opd_id');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
