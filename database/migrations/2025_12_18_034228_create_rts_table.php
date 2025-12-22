@@ -11,9 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rts', function (Blueprint $table) {
-            $table->id();
+         Schema::create('rts', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+
+            $table->uuid('kelurahan_id');
+            $table->string('kode_rt', 5);
+
             $table->timestamps();
+
+            $table->index('kelurahan_id');
+            $table->index(['kelurahan_id', 'kode_rt']);
+
+            $table->foreign('kelurahan_id')
+                ->references('id')
+                ->on('kelurahans')
+                ->cascadeOnDelete();
         });
     }
 
