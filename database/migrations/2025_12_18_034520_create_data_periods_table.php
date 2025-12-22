@@ -12,8 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('data_periods', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+
+            $table->string('code')->unique(); // contoh: 2025-TW1
+            $table->string('name');           // contoh: Data Keluarga TW1 2025
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
+            $table->string('type')->default('survey'); // survey, sinkron_siga, sinkron_sandi, dll
+
             $table->timestamps();
+
+            $table->index('type');
+            $table->index(['start_date', 'end_date']);
         });
     }
 
