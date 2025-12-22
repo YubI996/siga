@@ -12,8 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kecamatans', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->string('kode', 20)->unique();
+            $table->string('nama');
             $table->timestamps();
+
+            $table->index('nama');
         });
     }
 
