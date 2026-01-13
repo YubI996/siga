@@ -1,0 +1,64 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE/Editor
+.idea
+.vscode
+*.swp
+*.swo
+
+# Dependencies (will be installed in container)
+/node_modules
+/vendor
+
+# Build artifacts
+/public/build
+/public/hot
+
+# Laravel generated files
+/storage/*.key
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/logs/*
+!/storage/framework/.gitkeep
+!/storage/logs/.gitkeep
+
+# Environment files
+.env
+.env.backup
+.env.local
+.env.*.local
+
+# Test files
+/tests
+phpunit.xml
+.phpunit.result.cache
+.phpunit.cache
+/coverage
+
+# Docker files (not needed inside container)
+docker-compose*.yml
+Dockerfile*
+deploy.sh
+Makefile
+
+# Documentation
+*.md
+LICENSE
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# Misc
+*.sql
+*.zip
+*.tar.gz
